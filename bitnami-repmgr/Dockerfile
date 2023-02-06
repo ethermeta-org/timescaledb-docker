@@ -33,7 +33,8 @@ ARG PG_VERSION
 FROM bitnami/postgresql-repmgr:${PG_VERSION}
 ARG PG_VERSION
 
-LABEL maintainer="Timescale https://www.timescale.com"
+LABEL org.opencontainers.image.source=https://github.com/ethermeta-org/timescaledb-docker
+
 
 COPY docker-entrypoint-bitnami-repmgr-initdb.d/* /docker-entrypoint-initdb.d/
 COPY --from=tools /go/bin/* /usr/local/bin/
