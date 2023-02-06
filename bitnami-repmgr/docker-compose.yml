@@ -1,0 +1,58 @@
+version: '2'
+services:
+  pg-0:
+    image: ghcr.io/masami10/timescaledb-docker:2.9.1-pg12-repmgr-bitnami
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 8g
+    ports:
+      - 5432
+    volumes:
+      - /data/bitnami/pg-repmgr:/bitnami/postgresql
+    environment:
+      - NO_TS_TUNE=true # 关闭tune 避免ready节点无法正常启动
+      - TS_TELEMETRY=off
+      - POSTGRESQL_POSTGRES_PASSWORD=custompassword
+      # - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - PGPASSWORD=custompassword
+      - POSTGRESQL_SHARED_PRELOAD_LIBRARIES=repmgr,pgaudit,timescaledb
+      # - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PRIMARY_PORT=5432
+      - REPMGR_PARTNER_NODES=pg-0,pg-1:5432
+      - REPMGR_NODE_NAME=pg-0
+      - REPMGR_NODE_NETWORK_NAME=pg-0
+      - REPMGR_PORT_NUMBER=5432
+      - BITNAMI_DEBUG=true
+  pg-1:
+    image: ghcr.io/masami10/timescaledb-docker:2.9.1-pg12-repmgr-bitnami
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8g
+    ports:
+      - 5432
+    volumes:
+      - /data/bitnami/pg-repmgr2:/bitnami/postgresql
+    environment:
+      - NO_TS_TUNE=true # 关闭tune 避免ready节点无法正常启动
+      - TS_TELEMETRY=off
+      - POSTGRESQL_POSTGRES_PASSWORD=custompassword
+      - POSTGRESQL_SHARED_PRELOAD_LIBRARIES=pgaudit,timescaledb
+      # - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - PGPASSWORD=custompassword
+      # - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PRIMARY_PORT=5432
+      - REPMGR_PARTNER_NODES=pg-0,pg-1:5432
+      - REPMGR_NODE_NAME=pg-1
+      - REPMGR_NODE_NETWORK_NAME=pg-1
+      - REPMGR_PORT_NUMBER=5432
+      - BITNAMI_DEBUG=true
