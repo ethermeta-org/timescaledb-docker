@@ -4,6 +4,11 @@ on:
     branches: [ main ]
   repository_dispatch:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'TimeScaleDB Version'
+        required: false
+        default: '2.9.3'
 
 env:
   ORG: ghcr.io/ethermeta-org
