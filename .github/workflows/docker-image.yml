@@ -7,7 +7,7 @@ on:
 
 env:
   ORG: ghcr.io/ethermeta-org
-  TS_VERSION: ${{ github.event.inputs.version || secrets.RELEASE_VERSION || '2.9.2' }}
+  TS_VERSION: ${{ github.event.inputs.version || secrets.RELEASE_VERSION || '2.9.3' }}
 jobs:
   timescaledb-bitnami:
 
