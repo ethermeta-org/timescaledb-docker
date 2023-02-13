@@ -32,14 +32,16 @@ RUN rm -f $(pg_config --sharedir)/extension/timescaledb*mock*.sql \
 ARG PG_VERSION
 FROM bitnami/postgresql-repmgr:${PG_VERSION}
 ARG PG_VERSION
+ARG SOURCE_OPT_LIB_DIR
+ARG SOURCE_OPT_SHARE_DIR
 
 LABEL org.opencontainers.image.source=https://github.com/ethermeta-org/timescaledb-docker
 
 
 COPY docker-entrypoint-bitnami-repmgr-initdb.d/* /docker-entrypoint-initdb.d/
 COPY --from=tools /go/bin/* /usr/local/bin/
-COPY --from=oldversions /opt/bitnami/postgresql/lib/timescaledb-*.so /opt/bitnami/postgresql/lib/
-COPY --from=oldversions /opt/bitnami/postgresql/share/extension/timescaledb--*.sql /opt/bitnami/postgresql/share/extension/
+COPY --from=oldversions ${SOURCE_OPT_LIB_DIR}/timescaledb-*.so /opt/bitnami/postgresql/lib/
+COPY --from=oldversions ${SOURCE_OPT_SHARE_DIR}/extension/timescaledb--*.sql /opt/bitnami/postgresql/share/extension/
 
 USER 0
 ARG TS_VERSION
