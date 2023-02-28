@@ -8,11 +8,11 @@ on:
       version:
         description: 'TimeScaleDB Version'
         required: false
-        default: '2.9.3'
+        default: '2.10.0'
 
 env:
   ORG: ghcr.io/ethermeta-org
-  TS_VERSION: ${{ github.event.inputs.version || secrets.RELEASE_VERSION || '2.9.3' }}
+  TS_VERSION: ${{ github.event.inputs.version || secrets.RELEASE_VERSION || '2.10.0' }}
 jobs:
   timescaledb-bitnami:
 
