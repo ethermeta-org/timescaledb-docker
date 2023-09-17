@@ -46,8 +46,8 @@ LABEL org.opencontainers.image.source=https://github.com/ethermeta-org/timescale
 
 COPY docker-entrypoint-bitnami-repmgr-initdb.d/* /docker-entrypoint-initdb.d/
 COPY --from=tools /go/bin/* /usr/local/bin/
-COPY --from=oldversions ${SOURCE_OPT_LIB_DIR}/.emptyfile ${SOURCE_OPT_LIB_DIR}/timescaledb-*.so /opt/bitnami/postgresql/lib/
-COPY --from=oldversions ${SOURCE_OPT_SHARE_DIR}/.emptyfile ${SOURCE_OPT_SHARE_DIR}/extension/timescaledb--*.sql /opt/bitnami/postgresql/share/extension/
+COPY --from=oldversions ${SOURCE_OPT_LIB_DIR}/timescaledb-*.so /opt/bitnami/postgresql/lib/
+COPY --from=oldversions ${SOURCE_OPT_SHARE_DIR}/extension/timescaledb--*.sql /opt/bitnami/postgresql/share/extension/
 COPY bitnami-repmgr/timescaledb-bitnami-entrypoint.sh /opt/bitnami/scripts/postgresql/
 
 USER 0
