@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   pg-0:
-    image: ghcr.io/ethermeta-org/timescaledb-docker:latest-pg12-repmgr-bitnami
+    image: ghcr.io/ethermeta-org/timescaledb-docker:latest-pg14-repmgr-bitnami
     restart: always
     ports:
       - 5432
@@ -22,7 +22,7 @@ services:
       - REPMGR_USERNAME=repmgr
       - REPMGR_PASSWORD=repmgrpassword
   pg-1:
-    image: ghcr.io/ethermeta-org/timescaledb-docker:latest-pg12-repmgr-bitnami
+    image: ghcr.io/ethermeta-org/timescaledb-docker:latest-pg14-repmgr-bitnami
     restart: always
     ports:
       - 5432

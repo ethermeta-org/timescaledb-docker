@@ -8,11 +8,11 @@ on:
       version:
         description: 'TimeScaleDB Version'
         required: false
-        default: '2.11.2'
+        default: '2.12.0'
 
 env:
   ORG: ghcr.io/ethermeta-org
-  TS_VERSION: ${{ github.event.inputs.version || secrets.RELEASE_VERSION || '2.11.2' }}
+  TS_VERSION: ${{ github.event.inputs.version || secrets.RELEASE_VERSION || '2.12.0' }}
 jobs:
   timescaledb-bitnami:
 
@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pg: [12, 13, 14, 15]
+        pg: [13, 14, 15]
 
     steps:
       - uses: actions/checkout@v3
